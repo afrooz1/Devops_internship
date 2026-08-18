@@ -1,0 +1,28 @@
+  GNU nano 7.2                                                 commands.txt
+# Navigate to assessment directory
+pwd
+ls
+nano
+mkdir
+
+# Kernel investigation
+dmesg | head -30
+
+# Storage/device investigation
+dmesg | grep -Ei "disk|storage|nvme|scsi"
+
+# Network investigation
+dmesg | grep -Ei "network|eth|net|veth"
+ip link
+
+# Service investigation
+journalctl -b | grep -E "Started|Starting" | head -30
+systemctl list-units --type=service --state=running
+
+# PID 1 investigation
+ps -p 1 -o pid,comm,args
+
+# Boot target investigation
+systemctl get-default
+systemctl list-units --type=target
+systemctl status multi-user.target

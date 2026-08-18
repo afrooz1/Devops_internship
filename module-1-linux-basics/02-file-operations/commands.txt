@@ -1,0 +1,93 @@
+# Task 2 — Basic File and Directory Operations
+
+# Check current location
+pwd
+
+# Create directories
+mkdir dir1 dir2 dir3
+
+# Create files using touch
+touch file1.txt file2.txt file3.txt
+
+# Create files using nano
+nano file4.txt
+nano file5.txt
+
+# List files and directories
+ls
+
+# Move file into directory
+mv file1.txt dir1/
+
+# Rename files
+mv file2.txt renamed-file.txt
+mv file3.txt renamed-file.md
+
+# Copy file
+cp renamed-file.md dir2/
+
+# Copy directory recursively
+cp -r dir1 dir3/
+
+# Delete a file
+rm file4.txt
+
+# Delete an empty directory
+rmdir dir4
+
+# Delete a directory containing files
+rm -r dir1
+
+# Hard link
+touch link-original.txt
+echo "this is my link test file" > link-original.txt
+ln link-original.txt hard-link.txt
+
+# Verify hard link and inode
+ls -li link-original.txt
+ls -li hard-link.txt
+
+# Test hard-link modification
+echo >> hard-link.txt
+nano hard-link.txt
+cat link-original.txt
+
+# Symbolic link
+nano original-link.txt
+ln -s original-link.txt soft-link.txt
+
+# Test symbolic link
+nano soft-link.txt
+cat original-link.txt
+cat soft-link.txt
+
+# Delete symbolic-link target
+rm original-link.txt
+cat soft-link.txt
+
+# Create archive test directory
+mkdir arch-test
+touch arch-test/file1.txt arch-test/file2.txt arch-test/file3.txt
+
+# Add content
+echo "File one content" > arch-test/file1.txt
+echo "File two content" > arch-test/file2.txt
+echo "File three content" > arch-test/file3.txt
+
+# Create compressed tar archive
+tar -czvf archive-test.tar.gz arch-test/
+
+# List archive contents
+tar -tzvf archive-test.tar.gz
+
+# Remove original directory
+rm -r arch-test
+
+# Extract archive
+tar -xzvf archive-test.tar.gz
+
+# Verify restored files
+ls arch-test
+cat arch-test/file1.txt
+cat arch-test/file2.txt
+cat arch-test/file3.txt

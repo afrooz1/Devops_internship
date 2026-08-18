@@ -1,0 +1,153 @@
+
+# Task 10 — Text Manipulation with grep
+
+
+# Create task directory
+mkdir -p ~/module-1-linux-basics/10-grep
+cd ~/module-1-linux-basics/10-grep
+
+# Create files
+touch README.md commands.txt sample.log
+
+# Open/edit sample log using nano
+nano sample.log
+
+
+# Basic grep Searching
+
+# Find lines containing ERROR
+grep "ERROR" sample.log
+
+# Case-insensitive search
+grep -i "error" sample.log
+
+# Display matching line numbers
+grep -n "ERROR" sample.log
+
+# Count matching lines
+grep -c "ERROR" sample.log
+
+
+
+# Regular Expressions
+
+# Find lines beginning with a number
+grep '^[0-9]' sample.log
+
+
+
+# Excluding Patterns
+
+
+# Display lines that do NOT contain ERROR
+grep -v "ERROR" sample.log
+
+# Case-insensitive exclusion
+grep -vi "error" sample.log
+
+
+
+# Recursive Search
+=
+
+# Create directories for multiple log files
+mkdir -p logs/app logs/server
+
+# Create log files
+cp sample.log logs/app/app.log
+cp sample.log logs/server/server.log
+
+# Search recursively for ERROR
+grep -r "ERROR" logs/
+
+
+# grep + awk
+
+
+# Extract the last field from ERROR lines
+# In this log format, the last field is the IP address
+grep "ERROR" sample.log | awk '{print $NF}'
+
+
+
+# grep + sed
+
+
+# Replace ERROR with ALERT in displayed output
+grep "ERROR" sample.log | sed 's/ERROR/ALERT/g'
+
+
+
+# grep + cut
+
+
+# Extract the date field from ERROR lines
+grep "ERROR" sample.log | cut -d' ' -f1
+
+# Log Checker Script
+
+# Create the script
+nano log_checker.sh
+
+# Make the script executable
+chmod +x log_checker.sh
+
+# Run the script with sample log
+./log_checker.sh sample.log
+
+# Run with a non-existing file to test error handling
+./log_checker.sh missing.log
+
+
+
+# Useful grep Options
+
+
+# -i = ignore case
+# -n = show line numbers
+# -c = count matching lines
+# -v = invert/exclude matching lines
+# -r = recursive search
+# -q = quiet mode; do not display matching output
+# -E = extended regular expressions
+
+
+
+# Pipes
+
+
+# Send grep output to awk
+grep "ERROR" sample.log | awk '{print $NF}'
+
+# Send grep output to sed
+grep "ERROR" sample.log | sed 's/ERROR/ALERT/g'
+
+# Send grep output to cut
+grep "ERROR" sample.log | cut -d' ' -f1
+
+
+
+# Log Checker Script Example
+
+
+#!/bin/bash
+
+log_file=$1
+
+if [ -f "$log_file" ]
+then
+    echo "Log file exists"
+
+    if grep -q "ERROR" "$log_file"
+    then
+        echo "ALERT: ERROR found in log file"
+    fi
+
+    if grep -q "WARNING" "$log_file"
+    then
+        echo "ALERT: WARNING found in log file"
+    fi
+
+else
+    echo "Log file does not exist"
+fi

@@ -1,0 +1,88 @@
+# Task 12 — SSH, SCP and SFTP
+
+# Check SSH tools
+
+which ssh
+which sshd
+which scp
+which sftp
+
+# Check hostname and IP
+
+hostname
+ip addr
+
+# Check SSH service
+
+systemctl status ssh
+
+# Check port 22
+
+ss -tlnp | grep ':22'
+
+# Test connectivity
+
+ping -c 4 10.0.110.100
+
+# SSH password login
+
+ssh root@10.0.110.100
+
+# Generate SSH key
+
+ssh-keygen -t ed25519
+
+# Check SSH files
+
+ls -la ~/.ssh
+
+# Copy public key to server
+
+ssh-copy-id root@10.0.110.100
+
+# SSH using key
+
+ssh root@10.0.110.100
+
+# Check server user and hostname
+
+whoami
+hostname
+
+# View known hosts
+
+cat ~/.ssh/known_hosts
+
+# View authorized keys on server
+
+cat ~/.ssh/authorized_keys
+
+# Create test file
+
+echo "SCP test from WSL client" > scp-test.txt
+
+# SCP upload
+
+scp scp-test.txt root@10.0.110.100:/root/
+
+# SCP download
+
+scp root@10.0.110.100:/root/server-file.txt .
+
+# Connect using SFTP
+
+sftp root@10.0.110.100
+
+# SFTP commands
+
+pwd
+ls
+cd /tmp
+cd /root
+put sftp-upload.txt
+get server-file.txt
+exit
+
+# Verify downloaded file
+
+cat server-file.txt

@@ -1,0 +1,75 @@
+# Task 11 — Processes and Performance Monitoring
+
+# Create directory
+mkdir -p 11-processes
+cd 11-processes
+
+# 1. Start a test process
+sleep 300 &
+
+# 2. Check process details
+ps -p <PID> -f
+ps -p <PID> -o pid,ppid,user,%cpu,%mem,stat,cmd
+
+# 3. View processes
+ps
+ps -ef
+
+# 4. Real-time monitoring
+top
+
+# 5. Interactive monitoring
+htop
+
+# 6. Start multiple test processes
+sleep 300 &
+sleep 300 &
+sleep 300 &
+
+# Find sleep processes
+pgrep sleep
+pgrep -a sleep
+
+# 7. Kill a process by PID
+sleep 300 &
+kill <PID>
+ps -p <PID>
+
+# 8. Kill processes by name
+sleep 300 &
+sleep 300 &
+sleep 300 &
+pgrep -a sleep
+pkill sleep
+pgrep sleep
+
+# 9. Start process with nice value
+nice -n 10 sleep 300 &
+ps -p <PID> -o pid,ni,pri,stat,cmd
+
+# 10. Change priority
+ps -p <PID> -o ni,pri
+renice 15 -p <PID>
+ps -p <PID> -o ni,pri
+
+# 11. Process signals
+kill <PID>
+kill -15 <PID>
+kill -9 <PID>
+
+# 12. Compare kill commands
+pgrep -a sleep
+kill <PID>
+pkill sleep
+killall sleep
+
+# 13. Useful process information
+ps -p <PID> -o pid,ppid,user,%cpu,%mem,stat,cmd
+pgrep -a sleep
+ps -ef
+pstree
+
+# 14. Cleanup
+pgrep -a sleep
+pkill sleep
+pgrep sleep

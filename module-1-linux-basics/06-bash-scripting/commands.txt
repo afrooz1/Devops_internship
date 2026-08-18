@@ -1,0 +1,388 @@
+TASK 6 — BASH SCRIPTING
+
+
+Working directory:
+~/module-1-linux-basics/06-bash-scripting
+
+Scripts directory:
+~/module-1-linux-basics/06-bash-scripting/scripts
+
+
+
+1. NAVIGATION AND SETUP
+
+
+cd ~/module-1-linux-basics/06-bash-scripting
+cd scripts
+
+pwd
+ls
+
+
+
+2. SCRIPT 1 — DIRECTORY CHECKER
+
+
+Create the script:
+
+nano directory_checker.sh
+
+Make executable:
+
+chmod +x directory_checker.sh
+
+Run with an existing directory:
+
+./directory_checker.sh .
+
+Run with a non-existing directory:
+
+./directory_checker.sh scripts
+
+Run without an argument:
+
+./directory_checker.sh
+
+
+Important concept:
+
+$1
+First command-line argument.
+
+-d
+Checks whether the specified path exists and is a directory.
+
+
+
+3. SCRIPT 2 — FILE PERMISSION CHECKER
+
+
+Create a test file:
+
+touch test-file.txt
+
+Create/edit script:
+
+nano permission_checker.sh
+
+Make executable:
+
+chmod +x permission_checker.sh
+
+Run the script:
+
+./permission_checker.sh test-file.txt
+
+
+Permission tests used:
+
+-r
+Checks whether the file is readable.
+
+-w
+Checks whether the file is writable.
+
+-x
+Checks whether the file is executable.
+
+
+
+4. SCRIPT 3 — ROOT CHECKER
+
+
+Create/edit script:
+
+nano root_checker.sh
+
+Make executable:
+
+chmod +x root_checker.sh
+
+Run as normal user:
+
+./root_checker.sh
+
+Run using sudo:
+
+sudo ./root_checker.sh
+
+
+Important commands/concepts:
+
+echo $USER
+Displays the current username.
+
+echo $EUID
+Displays the effective user ID.
+
+id
+Displays user and group identity information.
+
+id root
+Displays information about the root account.
+
+
+Important concept:
+
+UID 0 = root/superuser
+
+-eq
+Numeric equality comparison.
+
+
+
+5. SCRIPT 4 — ARGUMENT HANDLER
+
+
+Create/edit script:
+
+nano argument_handler.sh
+
+Make executable:
+
+chmod +x argument_handler.sh
+
+
+Test logs action:
+
+./argument_handler.sh logs
+
+Test status action:
+
+./argument_handler.sh status
+
+Test disk action:
+
+./argument_handler.sh disk
+
+Test block-device action:
+
+./argument_handler.sh block
+
+Test invalid command:
+
+./argument_handler.sh hello
+
+Test without an argument:
+
+./argument_handler.sh
+
+
+Commands used by the script:
+
+journalctl | head -n 10
+
+systemctl status graphical.target
+
+df -h
+
+lsblk
+
+
+Important Bash construct:
+
+case
+
+Default case:
+
+*)
+
+
+
+6. SCRIPT 5 — FILE LOOP
+
+
+Create test files:
+
+touch file1.txt file2.txt file3.txt
+
+Create/edit script:
+
+nano file_loop.sh
+
+Make executable:
+
+chmod +x file_loop.sh
+
+Run:
+
+./file_loop.sh
+
+
+Loop structure practiced:
+
+for
+do
+done
+
+
+File metadata investigation:
+
+stat file1.txt
+
+stat --help
+
+man stat
+
+
+Custom stat format:
+
+stat -c "%A %n %U" file1.txt
+
+
+Format specifiers:
+
+%A = permissions
+%n = filename
+%U = owner username
+
+
+Run final script:
+
+./file_loop.sh
+
+
+
+7. BASH VARIABLE PRACTICE
+
+
+Example variable:
+
+name="Afrooz"
+
+Display variable:
+
+echo "$name"
+
+Current username:
+
+echo $USER
+
+First command-line argument:
+
+echo $1
+
+Previous command exit status:
+
+echo $?
+
+
+
+8. EXIT CODE PRACTICE
+
+
+Successful command:
+
+ls file1.txt
+
+Check exit code:
+
+echo $?
+
+
+Failed command:
+
+ls does-not-exist.txt
+
+Check exit code:
+
+echo $?
+
+
+Important concept:
+
+0       = success
+non-zero = failure/error
+
+
+
+9. BASH TEST OPERATORS
+=
+
+Regular file:
+
+[ -f "$file" ]
+
+Directory:
+
+[ -d "$directory" ]
+
+Readable:
+
+[ -r "$file" ]
+
+Writable:
+
+[ -w "$file" ]
+
+Executable:
+
+[ -x "$file" ]
+
+
+
+10. STRING AND NUMERIC COMPARISON
+
+
+String comparison:
+
+[ "$name" = "afrooz" ]
+
+Numeric comparison:
+
+[ "$number" -eq 0 ]
+
+
+
+11. DOCUMENTATION / HELP USED
+
+
+Bash help:
+
+help
+
+Bash manual:
+
+man bash
+
+Command help:
+
+ls --help
+stat --help
+
+Stat manual:
+
+man stat
+
+
+
+12. FINAL VERIFICATION
+
+
+List scripts:
+
+ls -l
+
+Run directory checker:
+
+./directory_checker.sh .
+
+Run permission checker:
+
+./permission_checker.sh test-file.txt
+
+Run root checker:
+
+./root_checker.sh
+
+Run argument handler:
+
+./argument_handler.sh logs
+./argument_handler.sh status
+./argument_handler.sh disk
+./argument_handler.sh block
+./argument_handler.sh hello
+
+Run file loop:
+
+./file_loop.sh

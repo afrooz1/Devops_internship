@@ -1,0 +1,75 @@
+Task 7 — Using Nano
+
+
+1. Navigate to the assessment directory
+
+cd ~/module-1-linux-basics
+cd 07-nano
+
+
+2. List task files
+
+ls
+
+
+3. Open/create the Nano practice file
+
+nano practice.txt
+
+Nano shortcuts practiced:
+Ctrl + O    Save / Write Out
+Ctrl + X    Exit Nano
+Ctrl + W    Search inside the file
+Ctrl + K    Cut the current line
+Ctrl + U    Paste previously cut text
+
+
+4. Open/create the Bash script using Nano
+
+nano nano_script.sh
+
+
+5. Make the Bash script executable
+
+chmod +x nano_script.sh
+
+
+6. Execute the Bash script
+
+./nano_script.sh
+
+
+7. Verify the created files
+
+ls -l
+
+
+8. Display the practice file
+
+cat practice.txt
+
+
+9. Display the Bash script
+
+cat nano_script.sh
+
+
+Nano Navigation
+
+Arrow Keys   Move the cursor
+Home         Move to beginning of line
+End          Move to end of line
+Page Up      Move upward through the file
+Page Down    Move downward through the file
+
+
+Nano Shortcut Notation
+
+^G = Ctrl + G
+^O = Ctrl + O
+^W = Ctrl + W
+^K = Ctrl + K
+^U = Ctrl + U
+^X = Ctrl + X
+
+The ^ symbol represents the Ctrl key in Nano.

@@ -1,0 +1,19 @@
+# Task 3 — Linux Storage and Filesystems
+
+# 1. Investigate block devices
+lsblk
+
+# 2. Investigate mounted filesystems and mount points
+findmnt
+
+# 3. Investigate disk usage and available space
+df -h
+
+# 4. Display filesystem types
+df -T
+
+# 5. Investigate inode usage
+df -i
+
+# 6. Find the filesystem used for the root filesystem /
+findmnt -no SOURCE,FSTYPE,TARGET /

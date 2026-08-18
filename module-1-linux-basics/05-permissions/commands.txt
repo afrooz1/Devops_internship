@@ -1,0 +1,354 @@
+# Navigate to Task 5
+
+cd ~/module-1-linux-basics/05-permissions
+
+
+# Create test directories
+
+mkdir dir1 dir2
+
+
+# Create test files
+
+touch file1.txt file2.txt file3.txt file4.txt
+
+
+# Create documentation files
+
+touch README.md commands.txt
+
+
+# Rename/move test directory and files
+
+mv dir1 test-dir
+
+mv file1.txt test-file.txt
+
+mv file2.txt permissions.txt
+
+
+# Verify files and directories
+
+ls
+
+ls -l
+
+
+# Create test content
+
+echo "Permission Test" > test-file.txt
+
+cat test-file.txt
+
+
+
+# Part A — Read Permission
+
+
+# Remove read permission from user
+
+chmod u-r test-file.txt
+
+# Test reading the file
+
+cat test-file.txt
+
+# Restore read permission
+
+chmod u+r test-file.txt
+
+# Verify
+
+cat test-file.txt
+
+
+
+# Part B — Write Permission
+
+
+# Add write permission for user
+
+chmod u+w test-file.txt
+
+# Test writing to the file
+
+echo "new line" >> test-file.txt
+
+# Remove write permission
+
+chmod u-w test-file.txt
+
+# Test writing without permission
+
+echo "new line" >> test-file.txt
+
+# Restore write permission
+
+chmod u+w test-file.txt
+
+
+
+# Part C — Execute Permission / Bash Script
+
+
+# Create scripts directory
+
+mkdir scripts
+
+
+# Create Bash script
+
+nano scripts/test-script.sh
+
+
+# Check initial permissions
+
+ls -l scripts/test-script.sh
+
+
+# Try executing without execute permission
+
+./scripts/test-script.sh
+
+
+# Add execute permission for user
+
+chmod u+x scripts/test-script.sh
+
+
+# Execute the script
+
+./scripts/test-script.sh
+
+
+# Verify changed permissions
+
+ls -l scripts/test-script.sh
+
+
+
+# Part D — Numeric Permissions
+
+
+# Set file permissions to 755
+
+chmod 755 permissions.txt
+
+
+# Verify permissions
+
+ls -l permissions.txt
+
+
+# Add read permission for others
+
+chmod o+r permissions.txt
+
+
+# Verify permissions again
+
+ls -l permissions.txt
+
+
+
+# Part E — Symbolic Permissions
+
+
+# Add read permission for user
+
+chmod u+r test-file.txt
+
+
+# Add write permission for user
+
+chmod u+w test-file.txt
+
+
+# Remove write permission from group
+
+chmod g-w test-file.txt
+
+
+# Add read permission for others
+
+chmod o+r test-file.txt
+
+
+# Verify symbolic permission changes
+
+ls -l test-file.txt
+
+
+
+# Part F — Ownership
+
+
+# Check current user
+
+whoami
+
+
+# Check current user ID and groups
+
+id
+
+
+# Create a test group
+
+sudo groupadd dev-test
+
+
+# Create a test user
+
+sudo useradd test
+
+
+# Check the test user
+
+id test
+
+
+# Add test user to dev-test group
+
+sudo usermod -aG dev-test test
+
+
+# Verify group membership
+
+groups test
+
+
+# Create ownership test file
+
+touch ownership-test.txt
+
+
+# Check current ownership
+
+ls -l ownership-test.txt
+
+
+# Change only the group
+
+sudo chown :dev-test ownership-test.txt
+
+
+# Verify group ownership
+
+ls -l ownership-test.txt
+
+
+# Change both owner and group
+
+sudo chown test:dev-test ownership-test.txt
+
+
+# Verify owner and group
+
+ls -l ownership-test.txt
+
+
+
+# Part G — Special Permissions
+
+
+# Find existing SUID files
+
+find /usr/bin -perm -4000 -type f 2>/dev/null | head
+
+
+# Find existing SGID files
+
+find /usr/bin -perm -2000 -type f 2>/dev/null | head
+
+
+# Find directories with Sticky Bit
+
+find /tmp -maxdepth 1 -type d -perm -1000 -ls 2>/dev/null
+
+
+# Check /tmp permissions
+
+ls -ld /tmp
+
+
+
+# Part H — Safe Special Permission Examples
+
+
+# Create special-permission test directory
+
+mkdir special-permissions
+
+
+# Create SUID test file
+
+touch special-permissions/suid-test
+
+
+# Set SUID permission
+
+chmod u+s special-permissions/suid-test
+
+
+# Verify SUID
+
+ls -l special-permissions/suid-test
+
+
+# Create SGID test directory
+
+mkdir special-permissions/sgid-test
+
+
+# Set SGID on directory
+
+chmod g+s special-permissions/sgid-test
+
+
+# Verify SGID
+
+ls -ld special-permissions/sgid-test
+
+
+# Create Sticky Bit test directory
+
+mkdir special-permissions/sticky-test
+
+
+# Set Sticky Bit
+
+chmod +t special-permissions/sticky-test
+
+
+# Verify Sticky Bit
+
+ls -ld special-permissions/sticky-test
+
+
+
+# Part I — Permission Verification
+
+
+# View all task files with permissions
+
+ls -la
+
+
+# View ownership-test file
+
+ls -l ownership-test.txt
+
+
+# View Bash script permissions
+
+ls -l scripts/test-script.sh
+
+
+# View special permission examples
+
+ls -l special-permissions/suid-test
+
+ls -ld special-permissions/sgid-test
+
+ls -ld special-permissions/sticky-test

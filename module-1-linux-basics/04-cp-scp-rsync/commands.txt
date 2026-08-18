@@ -1,0 +1,135 @@
+# Task 4 — cp vs scp vs rsync
+
+
+# Navigate to Task 4
+cd ~/module-1-linux-basics/04-cp-scp-rsync
+
+
+# Create Source Directory Structure
+
+
+mkdir -p source/config source/logs
+
+touch source/file1.txt source/file2.txt source/file3.txt
+
+echo "This is file 1" > source/file1.txt
+echo "This is file 2" > source/file2.txt
+echo "This is file 3" > source/file3.txt
+
+echo "application configuration" > source/config/app.conf
+echo "application started" > source/logs/app.log
+
+# Verify source files
+find source -type f
+
+
+# Part A — cp
+
+
+# Create backup directory
+mkdir backup
+
+# First attempt without recursive option
+cp source backup/
+
+# Expected result:
+# cp: -r not specified; omitting directory 'source'
+
+# Copy complete directory recursively
+cp -r source backup/
+
+# Verify copied files
+find backup -type f
+
+
+
+# Part B — scp
+
+
+# Check SSH and SCP
+which ssh
+which scp
+
+# Check OpenSSH version
+ssh -V
+
+# Check SSH service
+sudo systemctl status ssh
+
+# Start SSH service
+sudo systemctl start ssh
+
+# Verify SSH service
+sudo systemctl status ssh
+
+# Find WSL IP address
+hostname -I
+
+# Create SCP destination
+mkdir scp-destination
+
+# Create a test file in destination
+touch scp-destination/file.txt
+
+# Edit destination test file
+nano scp-destination/file.txt
+
+# Transfer file using SCP
+scp source/file1.txt afrooz@172.19.176.138:~/module-1-linux-basics/04-cp-scp-rsync/scp-destination/
+
+# Verify transferred file
+ls scp-destination
+cat scp-destination/file1.txt
+
+
+
+# Part C — rsync
+
+
+# Create rsync destination
+mkdir rsync-backup
+
+# Initial synchronization
+rsync -av source/ rsync-backup/
+
+# Verify synchronized files
+find rsync-backup -type f
+
+# View source file before modification
+cat source/file2.txt
+
+# Modify one source file
+echo "this file was added during rsync test" > source/file2.txt
+
+# Verify modified source file
+cat source/file2.txt
+
+# Verify backup still has old content
+cat rsync-backup/file2.txt
+
+# Synchronize again
+rsync -av source/ rsync-backup/
+
+# Verify updated destination file
+cat rsync-backup/file2.txt
+
+
+
+# rsync --delete Test
+
+
+# Create a file that exists only in destination
+touch rsync-backup/extra-file.txt
+
+# Verify extra file
+ls rsync-backup
+
+# Synchronize with --delete
+rsync -av --delete source/ rsync-backup/
+
+# Verify extra file was deleted
+ls rsync-backup
+
+# Verify source and destination structure
+ls source
+ls rsync-backup

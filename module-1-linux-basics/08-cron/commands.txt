@@ -1,0 +1,119 @@
+# Task 8 — Commands
+
+# Navigate to Task 8
+cd ~/module-1-linux-basics/08-cron
+
+# List files
+ls
+ls -lh
+
+# Create backup source directory
+mkdir -p backup-source
+
+# Create test files and directories
+touch backup-source/file1.txt
+touch backup-source/file2.txt
+mkdir -p backup-source/config
+mkdir -p backup-source/logs
+touch backup-source/config/app.conf
+touch backup-source/logs/app.log
+
+# Make backup script executable
+chmod +x backup.sh
+
+# Run backup script manually
+./backup.sh backup-source
+
+# Run backup script using full path
+/home/afrooz/module-1-linux-basics/08-cron/backup.sh /home/afrooz/module-1-linux-basics/08-cron/backup-source
+
+
+# List contents of a tar.gz archive
+tar -tzvf backup-YYYY-MM-DD-HH-MM-SS.tar.gz
+
+# Check cron service
+systemctl status cron
+
+# Check cron process
+ps -ef | grep cron
+
+# Open user's crontab
+crontab -e
+
+# Display current crontab
+crontab -l
+
+# Test cron job - every minute
+* * * * * /home/afrooz/module-1-linux-basics/08-cron/backup.sh /home/afrooz/module-1-linux-basics/08-cron/backup-source
+
+# Daily backup at midnight
+0 0 * * * /home/afrooz/module-1-linux-basics/08-cron/backup.sh /home/afrooz/module-1-linux-basics/08-cron/backup-source
+
+
+# Create process report script
+nano process_report.sh
+
+# Make process report executable
+chmod +x process_report.sh
+
+# Display running processes
+ps
+
+# Display detailed running processes
+ps -ef
+
+# Run process report script
+./process_report.sh
+
+# List generated process reports
+ls -lh process-report-*.txt
+
+# Display process report
+cat process-report-*.txt
+
+# Bonus cron job - process report every Monday at 08:00
+0 8 * * 1 /home/afrooz/module-1-linux-basics/08-cron/process_report.sh
+
+# Check current date and time
+date
+
+# Check current working directory
+pwd
+
+# Display the script path when executed
+echo "$0"
+
+# Extract directory from a path
+dirname /home/afrooz/module-1-linux-basics/08-cron/backup.sh
+
+# Demonstrate command substitution
+echo "$(date +%Y-%m-%d-%H-%M-%S)"
+```
+
+## Cron Expressions Used
+
+```text
+* * * * *
+Every minute
+
+0 0 * * *
+Every day at midnight
+
+0 8 * * 1
+Every Monday at 08:00
+```
+
+## Five Cron Fields
+
+```text
+minute hour day-of-month month day-of-week
+```
+
+## Useful Archive Verification
+
+For a `.tar.gz` archive, use:
+
+```bash
+tar -tzvf backup-2026-08-15-16-56-02.tar.gz
+```
+

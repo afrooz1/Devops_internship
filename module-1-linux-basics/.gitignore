@@ -1,0 +1,15 @@
+# ==========================
+
+# Screenshots
+
+# ==========================
+
+screenshots/
+screenshot/
+screenshots/*
+screenshot/*
+*.png
+*.jpg
+*.jpeg
+*.webp
+
